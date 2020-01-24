@@ -10,7 +10,7 @@ angular.module("recipeApp").controller("mainCtrl",function ($scope,$route,$docum
     });
   });
   $scope.tagsData=[];
-  //update for git connect
+  //update for git conne
  
 
   $scope.drpDwnFiltrSearch={};
