@@ -1,0 +1,56 @@
+<div class="container">
+    <h1 class="col-md-12" style="text-align: center;">Add New Tags</h1>
+    <ng-form  name="createTagForm" novalidate >
+      <div class="row "  style="margin-bottom:20px;">
+        <div class="col-md-12">
+          <div class="col-md-12">
+            <label> Choose the catagory to add..</label>
+            <div class="form-group">
+              <select name="tagParent" class="form-control" ng-model="createTag.SelectedCategory" required>
+                <option value="">Choose...</option>
+                <option ng-repeat="option in createTag.categoryOptions" value="{{option}}">{{option.Title}}</option>
+              </select>
+              <span ng-show="createTagForm.tagParent.$error.required && createTagForm.tagParent.$dirty" style="color: red;">!..Please select a category to proceed</span>
+            </div>
+            <div class="form-group" style="width:300px;" >
+              <label for="tag">Tag Name:</label>
+              <input class="form-control" name="tagValue" ng-model="createTag.tagValue" placeholder="Tags.." ng-maxlength="50" required>  
+              <span ng-show="createTagForm.tagValue.$error.required && createTagForm.tagValue.$dirty" style="color: red;">!..Please enter a Tag Name</span>
+            </div>
+            <button type="button" ng-disabled="createTagForm.tagValue.$error.required || createTagForm.tagParent.$error.required"  ng-click="createTag.saveTagData();" class="btn btn-outline-success btn-lg pull-right">Insert</button>
+          </div>
+        </div>
+      </div> 
+    </ng-form>
+    <div class="col-md-12">
+      <div class="form-group has-feedback has-search">
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        <input type="text" class="form-control" placeholder="Search tags...." ng-model="TagSearch">
+      </div>
+      <table  border="1" style="text-align: center; " class="table" id="scrollable">
+        <thead class="thead-dark" style="background-color:#23263c;color: white;">
+          <!-- <th style="text-align: center;">Tag Title</th>
+          <th style="text-align: center;">Parent/Category</th>
+          <th style="text-align: center;">Oprations</th> -->
+        </thead>
+        <tbody>
+          <tr  ng-repeat="tag in createTag.tagsData | filter:{Title:TagSearch}">
+              <td ng-bind="tag.Title"></td>
+              <td ng-bind="tag.ParentTitle"></td>
+              <td >
+                <div class="col-md-6">
+                  <span>
+                      <i style="cursor: pointer;" class="fa fa-pencil-square-o" aria-hidden="true" ng-click>Edit</i>
+                  </span>
+                </div>
+                <div class="col-md-6">
+                  <span>
+                      <i style="cursor: pointer;" class="fa fa-trash" aria-hidden="true" ng-click="createTag.DeleteTag(tag._id)">Delete</i> 
+                  </span>
+                </div>            
+              </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
